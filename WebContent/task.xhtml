@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
+<h:head>
+	<title>Task Manager</title>
+	<style type="text/css">
+.tg {
+	border-collapse: collapse;
+	border-spacing: 0;
+	border-color: #ccc;
+}
+
+.tg td {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #fff;
+}
+
+.tg th {
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	font-weight: normal;
+	padding: 10px 5px;
+	border-style: solid;
+	border-width: 1px;
+	overflow: hidden;
+	word-break: normal;
+	border-color: #ccc;
+	color: #333;
+	background-color: #f0f0f0;
+}
+
+.tg .tg-4eph {
+	background-color: #f9f9f9
+}
+</style>
+</h:head>
+<h:body>
+	<h1>Add a Task</h1>
+	<h:form>
+		<table>
+			<tr>
+				<td><label>Title</label></td>
+				<td><h:inputText id="title" value="#{task.title}"></h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td><label>Start Date</label></td>
+				<td><h:inputText id="beginDate" value="#{task.beginDate}"></h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td><label>End Date</label></td>
+				<td><h:inputText id="endDate" value="#{task.endDate}"></h:inputText>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><h:commandButton
+						action="#{taskService.addTask(task)}" value="Add Task"></h:commandButton>
+				</td>
+			</tr>
+
+		</table>
+
+	</h:form>
+
+	<br />
+	<h3>Tasks List</h3>
+
+	<c:if test="${!empty taskService.listTasks()}">
+		<table class="tg">
+			<tr>
+				<th width="80">Task ID</th>
+				<th width="120">Task Title</th>
+				<th width="120">Task Start Date</th>
+				<th width="120">Task End</th>
+			</tr>
+			<ui:repeat value="${taskService.listTasks()}" var="task">
+				<tr>
+					<td>${task.id}</td>
+					<td>${task.title}</td>
+					<td>${task.beginDate}</td>
+					<td>${task.endDate}</td>
+				</tr>
+			</ui:repeat>
+		</table>
+	</c:if>
+
+</h:body>
+</html>
